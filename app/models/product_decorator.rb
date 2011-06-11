@@ -1,8 +1,8 @@
 Product.class_eval do
   # spree 0.50.0 with devise 1.2rc2 loads this file twice
   # causing all sorts of havoc
-  unless defined?(@@_SPREE_PRODUCT_ASSEMBLY)
-    @@_SPREE_PRODUCT_ASSEMBLY = true
+  unless defined?(@_SPREE_PRODUCT_ASSEMBLY)
+    @_SPREE_PRODUCT_ASSEMBLY = true
 
     has_and_belongs_to_many  :assemblies, :class_name => "Product",
           :join_table => "assemblies_parts",
@@ -18,7 +18,6 @@ Product.class_eval do
     scope :active, lambda { |*args|
       not_deleted.individual_saled.available(args.first)
     }
-
 
     alias_method :orig_on_hand, :on_hand
     # returns the number of inventory units "on_hand" for this product
